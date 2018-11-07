@@ -29,7 +29,7 @@ client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) {
     let pages = [
 	`=-=-=-=-=-= 🌍 Public Commands - اوامر عامة 🌍 =-=-=-=-=-=
-     ✴ -sug =====> To Suggest | لعمل اقتراح
+     ✴  -sug =====> To Suggest | لعمل اقتراح
     ✴ -id ======> To Show Your ID | ايدي حسابك
     ✴ -ping ====> Ping Of Bot | بنج حك البوت
     ✴ -allbots => Show All Bots In The Server | لاضهار جميع البوتات
@@ -63,7 +63,7 @@ if (message.content.startsWith(prefix + 'help')) {
     ❖ -hchannel => Hide Channel | اخفاء الشات
     ❖ -schannel => Show The Hidden Channel | اضهار الشات المخفية
     ❖ -clr <numbr> => Clear Chat With Number | مسح الشات بعدد
-    ❖ -clear => Clear Chat | مسح الشات
+    ❖ -clear -c => Clear Chat | مسح الشات
     ❖ -mute @user <reason> => Mute User | اعطاء العضو ميوت لازم رتبة <Muted>
     ❖ -unmute @user => Unmute User | لفك الميوت عن الشخص 
     ❖ -kick @user <reason> => Kick User From Server | طرد الشخص من السيرفر
@@ -475,7 +475,7 @@ client.on('message', async msg => {
 			        .setDescription(`**الرجاء اختيار رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("Speed Bot")
+					.setFooter("CapTain BOT")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					try {
@@ -615,7 +615,7 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 const adminprefix = "-v";
-const devs = ['349616310734553088','335027415619338240'];
+const devs = ['350056492117917698','350056492117917698'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
@@ -1570,7 +1570,7 @@ var fkk =[
            } else {
 
                                var embedx = new Discord.RichEmbed()
-             .setTitle(':x:خطاء')
+             .setTitle(':x:خطاء يا غبي ')
              .setAuthor(message.author.username, message.author.avatarURL)
              .setColor("RANDOM")
              .setDescription(`**${result.author.username}** الإجابة خاطئة`);
@@ -2041,6 +2041,42 @@ var msg;
       }}).then(msg => {msg.delete(3000)});
 
 })
+	
+	
+	client.on('message', message => {
+	var prefix = "-";
+   if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'c')) {
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+let request = `Requested By ${message.author.username}`;
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+msg.react('✅')
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+var msg;
+        msg = parseInt();
+
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+      message.channel.sendMessage("", {embed: {
+        title: "`` Chat Deleted ``",
+        color: 0x06DF00,
+        footer: {
+
+        }
+      }}).then(msg => {msg.delete(3000)});
+
+})
+	
 reaction2.on("collect", r => {
 message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
 msg.delete();
